@@ -100,7 +100,8 @@ export default function LandingComponent() {
         file: selectedFile,
         name: selectedFile?.name,
       });
-      if (!response || !response?.success) {
+
+      if (!response.data || !response?.Success) {
         setLoading(false);
         return toast.error("Error", {
           duration: 1000,
@@ -108,11 +109,14 @@ export default function LandingComponent() {
         });
       }
       setImage(response?.data[0]?.url);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
+
+  console.log("res", image);
 
   return (
     <ThemeProvider theme={defaultTheme}>
