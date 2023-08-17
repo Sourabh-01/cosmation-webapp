@@ -1,13 +1,6 @@
 import axios from "axios";
 import { API_ENDPOINT, httpConstants } from "../constants";
 
-const headers = {
-  username:
-    String(localStorage.getItem("user")).slice(0, 1).toLowerCase() +
-    String(localStorage.getItem("user")).slice(1).toLowerCase(),
-  token: localStorage.getItem("token"),
-};
-
 export const loginUser = async (data) => {
   let url = "https://cosmation-microservice.onrender.com/login";
   try {
@@ -58,7 +51,12 @@ export const upload = async ({ file, name }) => {
     let response = await fetch(url, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
-      headers: headers,
+      headers: {
+        username:
+          String(localStorage.getItem("user")).slice(0, 1).toLowerCase() +
+          String(localStorage.getItem("user")).slice(1).toLowerCase(),
+        token: localStorage.getItem("token"),
+      },
       mode: "cors",
       redirect: "follow",
     })

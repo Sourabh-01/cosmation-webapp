@@ -100,14 +100,14 @@ export default function LandingComponent() {
         file: selectedFile,
         name: selectedFile?.name,
       });
-      if (!response) {
+      if (!response || !response?.success) {
+        setLoading(false);
         return toast.error("Error", {
           duration: 1000,
           position: "top-center",
         });
       }
       setImage(response?.data[0]?.url);
-      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
