@@ -1,8 +1,18 @@
 import React from "react";
 import Backdrop from "@mui/material/Backdrop";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  imageContainer: {
+    display: "flex",
+    width: "90%",
+    height: "90%",
+    objectFit: "contain"
+  },
+});
 
 const ImageBackdrop = ({ imageLink, setImage }) => {
-  console.log(imageLink, "......");
+  const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
@@ -14,7 +24,7 @@ const ImageBackdrop = ({ imageLink, setImage }) => {
       open={open}
       onClick={handleClose}
     >
-      <img src={imageLink} alt="image" />
+      <img className={classes.imageContainer} src={imageLink} alt="img" />
     </Backdrop>
   );
 };

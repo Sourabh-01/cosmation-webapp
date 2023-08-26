@@ -14,7 +14,6 @@ import { ReactComponent as Heart } from "../assets/heart.svg";
 import { useNavigate } from "react-router-dom";
 import { upload } from "../services";
 import { toast } from "react-hot-toast";
-import errorModal from "./errorModal";
 import ErrorModal from "./errorModal";
 import ImageBackdrop from "./imageBackdrop";
 
@@ -108,7 +107,7 @@ export default function LandingComponent() {
           position: "top-center",
         });
       }
-      setImage(response?.data[0]?.url);
+      setImage(response?.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
