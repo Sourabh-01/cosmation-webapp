@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_ENDPOINT, httpConstants } from "../constants";
 
 export const loginUser = async (data) => {
-  let url = "https://cosmation-microservice.onrender.com/login";
+  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.LOGIN;
   try {
     let response = await axios(url, {
       method: httpConstants.METHOD_TYPE.POST,
