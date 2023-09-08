@@ -38,32 +38,6 @@ const useStyles = makeStyles({
     height: 48,
     padding: "0 30px",
   },
-  header: {
-    height: 60,
-    backgroundColor: "white !important",
-  },
-  logoContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    "& .userField": {
-      color: "black",
-      display: "flex",
-      alignItems: "center",
-      marginRight: 50,
-    },
-    "& svg": {
-      width: 60,
-      height: 60,
-    },
-  },
-  menuItems: {
-    color: "black",
-    display: "flex",
-    alignItems: "center",
-    marginRight: 50,
-    justifyContent: "space-between",
-    width: "10%",
-  },
   footer: {
     width: "100%",
     "& svg": {
@@ -77,14 +51,6 @@ export default function LandingComponent() {
   const classes = useStyles();
   const navigate = useNavigate();
   const user = localStorage.getItem("user");
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
-  const handleRegister = () => {
-    navigate("/register");
-  };
-
   const [selectedFile, setSelectedFile] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [image, setImage] = React.useState(null);
@@ -121,19 +87,6 @@ export default function LandingComponent() {
     <ThemeProvider theme={defaultTheme}>
       {loading && <ErrorModal loading={loading} />}
       {image && <ImageBackdrop imageLink={image} setImage={setImage} />}
-      <AppBar position="relative" className={classes.header}>
-        <div className={classes.logoContainer}>
-          <Logo />
-          {user ? (
-            <div className="userField">Welcome, {user}</div>
-          ) : (
-            <div className={classes.menuItems}>
-              <div>About</div>
-              <div>Home</div>
-            </div>
-          )}
-        </div>
-      </AppBar>
       <main>
         {/* Hero unit */}
         <Box
@@ -212,11 +165,11 @@ export default function LandingComponent() {
                 spacing={2}
                 justifyContent="center"
               >
-                <Button variant="contained" onClick={handleLogin}>
-                  Login
-                </Button>
-                <Button variant="outlined" onClick={handleRegister}>
-                  Register
+                <Button
+                  variant="outlined"
+                  onClick={() => navigate("/alpha-trials")}
+                >
+                  Sign up for Alpha Trials!
                 </Button>
               </Stack>
             </Container>
