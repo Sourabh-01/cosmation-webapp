@@ -58,7 +58,7 @@ export default function SignUp() {
   const classes = useStyles();
   const handleNavigate = () => {
     setTimeout(() => {
-      navigate("/");
+      navigate("/alpha-trials");
     }, 1000);
   };
 

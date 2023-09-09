@@ -1,6 +1,7 @@
 import { AppBar } from "@mui/material";
 import React from "react";
 import { ReactComponent as Logo } from "../assets/logo.svg";
+import { ReactComponent as Profile } from "../assets/profile.svg";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 
@@ -18,6 +19,12 @@ const useStyles = makeStyles({
     height: "auto",
     backgroundColor: "white !important",
   },
+  rightContent: {
+    display: "flex",
+    alignItems: "center",
+    marginRight: 10,
+
+  },
   logoContainer: {
     display: "flex",
     justifyContent: "space-between",
@@ -27,19 +34,29 @@ const useStyles = makeStyles({
       alignItems: "center",
       marginRight: 50,
     },
-    "& svg": {
+    "& .logo": {
       margin: 5,
       width: 60,
       height: 60,
+    },
+  },
+  profileContainer: {
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "center",
+    marginLeft: 10,
+    "& .profile": {
+      margin: 5,
+      width: 40,
+      height: 40,
     },
   },
   menuItems: {
     color: "black",
     display: "flex",
     alignItems: "center",
-    marginRight: 50,
     width: "100%",
-    maxWidth: "300px",
+    maxWidth: "330px",
     justifyContent: "space-between",
     "& > div": {
       whiteSpace: "nowrap",
@@ -58,15 +75,23 @@ const useStyles = makeStyles({
 const Header = () => {
   const navigate = useNavigate();
   const classes = useStyles();
+  const user = localStorage.getItem("user");
   return (
     <AppBar position="relative" className={classes.header}>
       <div className={classes.logoContainer}>
-        <Logo />
-        <div className={classes.menuItems}>
-          <div onClick={() => navigate("/")}>Home</div>
-          <div onClick={() => navigate("/about-us")}>About Us</div>
-          <div onClick={() => navigate("/alpha-trials")}>Alpha Trials</div>
-          <div onClick={() => navigate("/contact-us")}>Contact Us</div>
+        <Logo className="logo" />
+        <div className={classes.rightContent}>
+          <div className={classes.menuItems}>
+            <div onClick={() => navigate("/")}>Home</div>
+            <div onClick={() => navigate("/about-us")}>About Us</div>
+            <div onClick={() => navigate("/alpha-trials")}>Alpha Trials</div>
+            <div onClick={() => navigate("/contact-us")}>Contact Us</div>
+          </div>
+          {user && (
+            <div className={classes.profileContainer}>
+              <Profile className="profile" />
+            </div>
+          )}
         </div>
       </div>
     </AppBar>

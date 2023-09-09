@@ -1,5 +1,4 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -9,13 +8,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-import { ReactComponent as Logo } from "../assets/logo.svg";
 import { ReactComponent as Heart } from "../assets/heart.svg";
 import { useNavigate } from "react-router-dom";
-import { upload } from "../services";
-import { toast } from "react-hot-toast";
-import ErrorModal from "./errorModal";
-import ImageBackdrop from "./imageBackdrop";
 
 function Copyright() {
   return (
@@ -50,43 +44,9 @@ const useStyles = makeStyles({
 export default function LandingComponent() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const user = localStorage.getItem("user");
-  const [selectedFile, setSelectedFile] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [image, setImage] = React.useState(null);
-  const changeHandler = (event) => {
-    setSelectedFile(event?.target?.files[0]);
-  };
-
-  const submitFile = async () => {
-    setLoading(true);
-    try {
-      let response = await upload({
-        file: selectedFile,
-        name: selectedFile?.name,
-      });
-
-      if (!response.data || !response?.Success) {
-        setLoading(false);
-        return toast.error("Error", {
-          duration: 1000,
-          position: "top-center",
-        });
-      }
-      setImage(response?.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
-  console.log("res", image);
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      {loading && <ErrorModal loading={loading} />}
-      {image && <ImageBackdrop imageLink={image} setImage={setImage} />}
       <main>
         {/* Hero unit */}
         <Box
@@ -96,84 +56,49 @@ export default function LandingComponent() {
             pb: 6,
           }}
         >
-          {user ? (
-            <Container maxWidth="sm">
-              <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="text.primary"
-                gutterBottom
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Break free of digital addiction. Sleep better. Explore your
+              sub-conscious.
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Cosmation is on a mission to provide tools for humans to sleep
+              better, leading to cognitive reset and better long-term mental
+              health.
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Sounds interesting?
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Button
+                variant="outlined"
+                onClick={() => navigate("/alpha-trials")}
               >
-                Get started
-              </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="column"
-                spacing={2}
-                justifyContent="center"
-                className={classes.uploader}
-              >
-                <input
-                  type="file"
-                  onChange={changeHandler}
-                  className={classes.file}
-                />
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  disabled={selectedFile === null}
-                  onClick={submitFile}
-                >
-                  Upload file
-                </Button>
-              </Stack>
-            </Container>
-          ) : (
-            <Container maxWidth="sm">
-              <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="text.primary"
-                gutterBottom
-              >
-                Break free of digital addiction. Sleep better. Explore your
-                sub-conscious.
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="text.secondary"
-                paragraph
-              >
-                Cosmation is on a mission to provide tools for humans to sleep
-                better, leading to cognitive reset and better long-term mental
-                health.
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="text.secondary"
-                paragraph
-              >
-                Sounds interesting?
-              </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-              >
-                <Button
-                  variant="outlined"
-                  onClick={() => navigate("/alpha-trials")}
-                >
-                  Sign up for Alpha Trials!
-                </Button>
-              </Stack>
-            </Container>
-          )}
+                Sign up for Alpha Trials!
+              </Button>
+            </Stack>
+          </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
