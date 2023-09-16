@@ -14,7 +14,8 @@ export const httpConstants = {
   export const API_ENDPOINT = {
     LOGIN: "/login",
     REGISTER: "/register",
-    UPLOAD: "/upload"
+    UPLOAD: "/upload",
+    CONTACT: "/contact-us"
   }
   
   export const TOAST_MESSAGES = {

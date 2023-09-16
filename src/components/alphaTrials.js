@@ -28,13 +28,6 @@ const useStyles = makeStyles({
     boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
     margin: 44,
   },
-  footer: {
-    width: "100%",
-    "& svg": {
-      width: 20,
-      height: 20,
-    },
-  },
 });
 
 const AlphaTrials = () => {
@@ -116,6 +109,20 @@ const AlphaTrials = () => {
                   Upload file
                 </Button>
               </Stack>
+              <Typography component="div" sx={{ marginTop: 10 }}>
+                <ul>
+                  <li>
+                    Supported Formats: MP3, MP4, MP2, AAC, WAV, FLAC, PCM, M4A,
+                    Ogg, Opus WebM
+                  </li>
+                  <li>Max file size: 15 MB.</li>
+                  <li>Languages Supported: English</li>
+                  <li>
+                    Note: For optimal performance, keep the audio files of 1
+                    minute max.
+                  </li>
+                </ul>
+              </Typography>
             </Container>
           ) : (
             <Container>
@@ -230,7 +237,7 @@ const AlphaTrials = () => {
                 color="text.secondary"
                 paragraph
               >
-                I’m in game.
+                I’m game.
               </Typography>
               <Stack
                 sx={{ pt: 4 }}

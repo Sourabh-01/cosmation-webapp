@@ -43,6 +43,27 @@ export const registerUser = async (data) => {
   }
 };
 
+export const sendQuery = async (data) => {
+  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.CONTACT;
+  try {
+    let response = await axios(url, {
+      method: httpConstants.METHOD_TYPE.POST,
+      data: data,
+      headers: { "Content-type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        return err;
+      });
+    return Promise.resolve(response);
+  } catch (error) {
+    Promise.reject(error);
+    console.log(error);
+  }
+};
+
 export const upload = async ({ file, name }) => {
   let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.UPLOAD;
   let formData = new FormData();

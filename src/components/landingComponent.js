@@ -32,13 +32,6 @@ const useStyles = makeStyles({
     height: 48,
     padding: "0 30px",
   },
-  footer: {
-    width: "100%",
-    "& svg": {
-      width: 20,
-      height: 20,
-    },
-  },
 });
 
 export default function LandingComponent() {
@@ -115,19 +108,6 @@ export default function LandingComponent() {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography
-          variant="h6"
-          align="center"
-          gutterBottom
-          className={classes.footer}
-        >
-          Made with <Heart /> in Sweden.
-        </Typography>
-        <Copyright />
-      </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 }

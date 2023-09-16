@@ -14,23 +14,6 @@ import { makeStyles } from "@mui/styles";
 import { loginUser } from "../services";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://cosmation.ai/">
-        Cosmation AB
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles({
   root: {
@@ -165,7 +148,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

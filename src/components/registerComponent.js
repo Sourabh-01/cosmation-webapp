@@ -17,24 +17,6 @@ import { registerUser } from "../services";
 import { toast, Toaster } from "react-hot-toast";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://cosmation.ai/">
-        Cosmation AB
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 // TODO remove, this demo shouldn't need to reset the theme.
 const useStyles = makeStyles({
   root: {
@@ -189,7 +171,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

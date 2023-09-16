@@ -1,11 +1,14 @@
-import { AppBar } from "@mui/material";
-import React from "react";
+import { AppBar, Button } from "@mui/material";
+import React, { useState } from "react";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import { ReactComponent as Profile } from "../assets/profile.svg";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import toast, { Toaster } from "react-hot-toast";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((props) => ({
   root: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
@@ -23,7 +26,6 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     marginRight: 10,
-
   },
   logoContainer: {
     display: "flex",
@@ -70,14 +72,50 @@ const useStyles = makeStyles({
       },
     },
   },
-});
+  userIcon: {
+    width: 40,
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#0b4199",
+    cursor: "pointer",
+    color: "white",
+    borderRadius: "50%",
+    margin: 5,
+    marginLeft: 10,
+  },
+}));
 
 const Header = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("user") ?? undefined;
   const classes = useStyles();
-  const user = localStorage.getItem("user");
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    toast.success("Logged out", {
+      duration: 1000,
+      position: "top-center",
+    });
+    handleClose();
+    navigate("/");
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <AppBar position="relative" className={classes.header}>
+      <Toaster />
       <div className={classes.logoContainer}>
         <Logo className="logo" />
         <div className={classes.rightContent}>
@@ -87,11 +125,34 @@ const Header = () => {
             <div onClick={() => navigate("/alpha-trials")}>Alpha Trials</div>
             <div onClick={() => navigate("/contact-us")}>Contact Us</div>
           </div>
-          {user && (
-            <div className={classes.profileContainer}>
+          <div className={classes.profileContainer}>
+            {!user ? (
               <Profile className="profile" />
-            </div>
-          )}
+            ) : (
+              <div className={classes.userIcon} onClick={user && handleClick}>
+                {String(localStorage.getItem("user").charAt(0))}
+              </div>
+            )}
+          </div>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <Typography sx={{ p: 2 }}>Welcome, {user}</Typography>
+            <Typography
+              sx={{ p: 2, cursor: "pointer" }}
+              textAlign="center"
+              onClick={handleLogout}
+            >
+              Sign Out
+            </Typography>
+          </Popover>
         </div>
       </div>
     </AppBar>
