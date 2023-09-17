@@ -1,8 +1,9 @@
 import axios from "axios";
 import { API_ENDPOINT, httpConstants } from "../constants";
+const apiURL = "https://service.cosmation.ai";
 
 export const loginUser = async (data) => {
-  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.LOGIN;
+  let url = apiURL + API_ENDPOINT.LOGIN;
   try {
     let response = await axios(url, {
       method: httpConstants.METHOD_TYPE.POST,
@@ -23,7 +24,7 @@ export const loginUser = async (data) => {
 };
 
 export const registerUser = async (data) => {
-  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.REGISTER;
+  let url = apiURL + API_ENDPOINT.REGISTER;
   try {
     let response = await axios(url, {
       method: httpConstants.METHOD_TYPE.POST,
@@ -44,7 +45,7 @@ export const registerUser = async (data) => {
 };
 
 export const sendQuery = async (data) => {
-  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.CONTACT;
+  let url = apiURL + API_ENDPOINT.CONTACT;
   try {
     let response = await axios(url, {
       method: httpConstants.METHOD_TYPE.POST,
@@ -65,7 +66,7 @@ export const sendQuery = async (data) => {
 };
 
 export const upload = async ({ file, name }) => {
-  let url = process.env.REACT_APP_SERVICE + API_ENDPOINT.UPLOAD;
+  let url = apiURL + API_ENDPOINT.UPLOAD;
   let formData = new FormData();
   formData.append("audio", file, name);
   try {
