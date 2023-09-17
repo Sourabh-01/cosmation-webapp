@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-import { sendQuery, upload } from "../services";
+import { sendQuery } from "../services";
 import { toast } from "react-hot-toast";
-import ErrorModal from "./errorModal";
-import ImageBackdrop from "./imageBackdrop";
-import { FormControl, FormLabel, TextField } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +25,12 @@ const useStyles = makeStyles({
     boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
     margin: 44,
   },
+  emailId: {
+    marginLeft: "0px !important",
+    '@media (min-width: 780px)': {
+      marginLeft: "20px !important",
+    }
+  }
 });
 
 const ContactUs = () => {
@@ -46,7 +48,7 @@ const ContactUs = () => {
     }));
   };
 
-  const sendEnquiry = async (data) => {
+  const sendEnquiry = async () => {
     try {
       let response = await sendQuery(state);
       if (!response?.data?.success) {
@@ -90,7 +92,7 @@ const ContactUs = () => {
               touch as soon as possible.
             </Typography>
             <FormControl>
-              <div>
+              <div className={classes.detailsContainer}>
                 <TextField
                   margin="normal"
                   required
@@ -113,8 +115,9 @@ const ContactUs = () => {
                   autoFocus
                   variant="standard"
                   onChange={handleChange}
+                  className={classes.emailId}
                   value={state.emailId}
-                  sx={{ marginLeft: 10 }}
+                  sx={{ marginLeft: 0 }}
                 />
               </div>
 

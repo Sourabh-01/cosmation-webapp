@@ -1,4 +1,4 @@
-import { AppBar, Button } from "@mui/material";
+import { AppBar } from "@mui/material";
 import React, { useState } from "react";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import { ReactComponent as Profile } from "../assets/profile.svg";
@@ -26,6 +26,7 @@ const useStyles = makeStyles((props) => ({
     display: "flex",
     alignItems: "center",
     marginRight: 10,
+    overflow: "auto"
   },
   logoContainer: {
     display: "flex",
@@ -117,7 +118,9 @@ const Header = () => {
     <AppBar position="relative" className={classes.header}>
       <Toaster />
       <div className={classes.logoContainer}>
-        <Logo className="logo" />
+        <div style={{width: 100}}>
+          <Logo className="logo" />
+        </div>
         <div className={classes.rightContent}>
           <div className={classes.menuItems}>
             <div onClick={() => navigate("/")}>Home</div>
