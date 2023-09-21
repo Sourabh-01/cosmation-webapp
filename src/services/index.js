@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_ENDPOINT, httpConstants } from "../constants";
-const apiURL = "http://35.156.198.205:3001";
+const apiURL = "https://service.cosmation.ai";
 
 export const loginUser = async (data) => {
   let url = apiURL + API_ENDPOINT.LOGIN;
