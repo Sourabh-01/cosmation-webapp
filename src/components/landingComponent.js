@@ -91,6 +91,19 @@ export default function LandingComponent() {
                 Sign up for Alpha Trials!
               </Button>
             </Stack>
+            <Stack
+              sx={{ pt: 1 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Button
+                variant="contained"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </Button>
+            </Stack>
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
