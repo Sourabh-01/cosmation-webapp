@@ -1,6 +1,8 @@
 import axios from "axios";
 import { API_ENDPOINT, httpConstants } from "../constants";
-const apiURL = "http://35.156.198.205:3001";
+const apiURL = "https://service.cosmation.ai";
+// const apiURL = "http://localhost:3001";
+
 
 export const loginUser = async (data) => {
   let url = apiURL + API_ENDPOINT.LOGIN;
@@ -65,10 +67,11 @@ export const sendQuery = async (data) => {
   }
 };
 
-export const upload = async ({ file, name }) => {
+export const upload = async ({ file, name, isRecorded }) => {
   let url = apiURL + API_ENDPOINT.UPLOAD;
   let formData = new FormData();
   formData.append("audio", file, name);
+  console.log("asdasads", formData);
   try {
     let response = await fetch(url, {
       method: httpConstants.METHOD_TYPE.POST,
@@ -78,6 +81,7 @@ export const upload = async ({ file, name }) => {
           String(localStorage.getItem("user")).slice(0, 1).toLowerCase() +
           String(localStorage.getItem("user")).slice(1).toLowerCase(),
         token: localStorage.getItem("token"),
+        // "content-type": "multipart/form-data",
       },
       mode: "cors",
       redirect: "follow",

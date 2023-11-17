@@ -1,11 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { ReactComponent as Heart } from "../assets/heart.svg";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center", paddingRight: 1, color: "white" }}
+    >
       {"Copyright © Cosmation AB "}
       {new Date().getFullYear()}{" "}
     </Typography>
@@ -29,36 +34,40 @@ const useStyles = makeStyles({
       height: 20,
     },
   },
+  mainContainer: {
+    padding: 6,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "transparent",
+  },
+  partition: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 function Footer() {
   const classes = useStyles();
   const navigate = useNavigate();
   return (
-    <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-      <Typography
-        variant="h6"
-        align="center"
-        gutterBottom
-        className={classes.footer}
-      >
-        Made with <Heart /> in Sweden.
-      </Typography>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      ></div>
+    <Box className={classes.mainContainer} component="footer">
       <Copyright />
       <Typography
         variant="body2"
         color="text.secondary"
         align="center"
+        sx={{ cursor: "pointer", color: "white" }}
+      >
+        |
+      </Typography>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
         margin={1}
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", color: "white" }}
         onClick={() => navigate("/disclaimer")}
       >
         Disclaimer
@@ -67,8 +76,16 @@ function Footer() {
         variant="body2"
         color="text.secondary"
         align="center"
+        sx={{ cursor: "pointer", color: "white" }}
+      >
+        |
+      </Typography>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
         margin={1}
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", color: "white" }}
         onClick={() => navigate("/privacy-policy")}
       >
         Privacy Policy

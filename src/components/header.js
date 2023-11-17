@@ -7,6 +7,16 @@ import { makeStyles } from "@mui/styles";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import toast, { Toaster } from "react-hot-toast";
+import Home from "../assets/home.jpg";
+import About from "../assets/about.jpg";
+import Alpha from "../assets/alpha-trials.jpg";
+import Contact from "../assets/contact.jpg";
+import Upload from "../assets/upload.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setBackground } from "../redux/globalState";
+import { useContext } from "react";
+import { UserContext } from "../redux/userContext";
 
 const useStyles = makeStyles((props) => ({
   root: {
@@ -26,7 +36,7 @@ const useStyles = makeStyles((props) => ({
     display: "flex",
     alignItems: "center",
     marginRight: 10,
-    overflow: "auto"
+    overflow: "auto",
   },
   logoContainer: {
     display: "flex",
@@ -114,11 +124,33 @@ const Header = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const backgrounds = {
+    HOME: Home,
+    ABOUT: About,
+    ALPHA: Alpha,
+    CONTACT: Contact,
+    UPLOAD: Upload,
+  };
+  const pathname = window.location.pathname;
+  const globalState = useSelector((state) => state.globalState);
+  const { setBackground } = useContext(UserContext);
+  const dispath = useDispatch();
+
+  useEffect(() => {
+    let backgroundValue = Object.keys(backgrounds).filter((el) => {
+      if (pathname.includes(String(el).toLowerCase())) {
+        return el;
+      }
+    });
+    setBackground(backgrounds[backgroundValue]);
+    // dispath(setBackground(backgrounds[backgroundValue]));
+  }, [pathname]);
+
   return (
     <AppBar position="relative" className={classes.header}>
       <Toaster />
       <div className={classes.logoContainer}>
-        <div style={{width: 100}}>
+        <div style={{ width: 100 }}>
           <Logo className="logo" />
         </div>
         <div className={classes.rightContent}>

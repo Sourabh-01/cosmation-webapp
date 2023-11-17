@@ -12,30 +12,89 @@ import { toast } from "react-hot-toast";
 import { FormControl, TextField } from "@mui/material";
 
 const useStyles = makeStyles({
-  root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    border: 0,
-    borderRadius: 3,
-
+  mainContainer: {
     color: "white",
-    height: 48,
-    padding: "0 30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "auto",
+    flexDirection: "column",
   },
-  main: {
-    boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-    margin: 44,
+  headingLight: {
+    fontSize: 40,
+    fontWeight: 500,
+    marginTop: 50,
+  },
+  content: {
+    fontSize: 22,
+    fontWeight: 400,
+    marginTop: 75,
+    maxWidth: 500,
+    textAlign: "center",
+  },
+  messageContainer: {
+    background: "rgba(255, 255, 255, 0.5)",
+    borderRadius: 10,
+    padding: 20,
+    marginTop: 20,
+    width: 450,
+    marginBottom: 30,
+  },
+  label: {
+    color: "black",
+    fontSize: 18,
+    margin: "20px 0px 5px 0px",
+  },
+  input: {
+    height: 40,
+    backgroundColor: "white !important",
+    color: "black",
+    outline: "none",
+    border: "none",
+    borderRadius: 10,
+    width: "97%",
+    paddingLeft: 10,
+  },
+  textArea: {
+    height: 150,
+    backgroundColor: "white !important",
+    color: "black",
+    outline: "none",
+    border: "none",
+    borderRadius: 10,
+    width: "97%",
+    paddingLeft: 10
   },
   emailId: {
     marginLeft: "0px !important",
-    '@media (min-width: 780px)': {
+    "@media (min-width: 780px)": {
       marginLeft: "20px !important",
-    }
-  }
+    },
+  },
+  buttonContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    marginTop: 40,
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 40,
+    background: "#1C5666",
+    border: "none",
+    color: "white",
+    padding: 20,
+    width: 120,
+    fontSize: 16,
+    cursor: "pointer",
+  },
 });
 
 const ContactUs = () => {
   const classes = useStyles();
-  const defaultTheme = createTheme();
   const [state, setState] = useState({
     name: "",
     emailId: "",
@@ -76,94 +135,55 @@ const ContactUs = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <main className={classes.main}>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container>
-            <Typography component="p" color="text.primary" marginBottom={2}>
-              In case of any questions, please fill this form and we will get in
-              touch as soon as possible.
-            </Typography>
-            <FormControl>
-              <div className={classes.detailsContainer}>
-                <TextField
-                  margin="normal"
-                  required
-                  id="name"
-                  label="Name"
-                  name="name"
-                  autoComplete="name"
-                  autoFocus
-                  variant="standard"
-                  value={state.name}
-                  onChange={handleChange}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  id="emailId"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  variant="standard"
-                  onChange={handleChange}
-                  className={classes.emailId}
-                  value={state.emailId}
-                  sx={{ marginLeft: 0 }}
-                />
-              </div>
-
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="message"
-                label="Message"
-                name="message"
-                autoComplete="message"
-                autoFocus
-                variant="standard"
-                value={state.message}
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{ mt: 3, mb: 2, width: "100px" }}
-                disabled={!state.name || !state.emailId || !state.message}
-                onClick={sendEnquiry}
-              >
-                Submit
-              </Button>
-            </FormControl>
-          </Container>
-        </Box>
-        <Container sx={{ py: 8 }}>
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              ></Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
-      {/* Footer */}
-      {/* End footer */}
-    </ThemeProvider>
+    <div className={classes.mainContainer}>
+      <span className={classes.headingLight}>Something on your mind?</span>
+      <span className={classes.content}>
+        In case of any questions, please fill this form and we will get in touch
+        as soon as possible.
+      </span>
+      <div className={classes.messageContainer}>
+        <div className={classes.label}>Name</div>
+        <input
+          className={classes.input}
+          id="name"
+          label="Name"
+          name="name"
+          autoFocus
+          value={state.name}
+          onChange={handleChange}
+        />
+        <div className={classes.label}>Email</div>
+        <input
+          className={classes.input}
+          id="emailId"
+          label="Email"
+          name="email"
+          autoFocus
+          onChange={handleChange}
+        />
+        <div className={classes.label}>Message</div>
+        <textarea
+          className={classes.textArea}
+          id="message"
+          label="Message"
+          name="message"
+          autoComplete="message"
+          autoFocus
+          variant="standard"
+          value={state.message}
+          onChange={handleChange}
+        />
+        <div className={classes.buttonContainer}>
+          <button
+            className={classes.button}
+            disabled={!state.name || !state.emailId || !state.message}
+            onClick={sendEnquiry}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
